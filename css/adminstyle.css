@@ -1,0 +1,11 @@
+#formcontainer{
+}
+.table{
+	margin-top:50px;
+}
+#formcontainer label{
+	text-shadow: 2px 2px #ffffff;
+}
+.showform{
+	cursor:pointer;
+}
