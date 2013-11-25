@@ -3,7 +3,7 @@ include('../admin/class.php');
 $q = new database();
 $con = $q->connect();
 if(!empty($_GET['alias'])){
-	$r = $q->query("SELECT detail FROM blog WHERE alias='".str_replace('#','',$_GET['alias'])."' LIMIT 0,1",$con);
+	$r = $q->query("SELECT detail FROM blog WHERE alias='%s' LIMIT 0,1",$con,array(str_replace('#','',$_GET['alias'])));
 	while($d = $r->fetch_assoc()){
 		echo '<p>'.nl2br($d['detail']).'</p>';
 	}

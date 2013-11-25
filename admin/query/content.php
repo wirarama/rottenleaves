@@ -3,15 +3,15 @@ include('../class.php');
 $q = new database();
 $con = $q->connect();
 if($_GET['submit']=='add' && !empty($_GET['title'])){
-	$q->query("INSERT INTO content VALUES(null,'".$_GET['title']."','".$_GET['alias']."','".$_GET['priority']."','".$con->real_escape_string($_GET['description'])."',null)",$con);
+	$q->query("INSERT INTO content VALUES(null,'%s','%s','%d','%s',null)",$con,array($_GET['title'],$_GET['alias'],$_GET['priority'],$_GET['description']));
 }elseif($_GET['submit']=='edit'){
-	$q->query("UPDATE content SET title='".$_GET['title']."',alias='".$_GET['alias']."',priority='".$_GET['priority']."',description='".$con->real_escape_string($_GET['description'])."' WHERE id='".$_GET['id']."'",$con);
+	$q->query("UPDATE content SET title='%s',alias='%s',priority='%d',description='%s' WHERE id='%d'",$con,array($_GET['title'],$_GET['alias'],$_GET['priority'],$_GET['description'],$_GET['id']));
 }elseif($_GET['submit']=='del'){
-	$q->query("DELETE FROM content WHERE id='".$_GET['id']."'",$con);
+	$q->query("DELETE FROM content WHERE id='%d'",$con,array($_GET['id']));
 }
 $where = '';
 if(!empty($_GET['search'])){
-	$where = "WHERE title like'%".$_GET['search']."%'";
+	$where = "WHERE title like'%".$con->real_escape_string($_GET['search'])."%'";
 }
 $page = ($_GET['index']-1)*10;
 $r = $q->query("SELECT * FROM content ".$where." ORDER BY priority LIMIT ".$page.",10",$con);

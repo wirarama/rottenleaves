@@ -4,9 +4,20 @@ class database{
 		$con = new mysqli('localhost','admin','dallas99','blog');
 		return $con;
 	}
-	function query($sql,$con){
+	function query($sql,$con,$input=array()){
 		if($con->connect_errno > 0) die($con->connect_error);
-		if(!$r = $con->query($sql)) die($con->error);
+		$i = 0;
+		if(sizeof($input)!=0){
+			$input2 = array();
+			foreach($input AS $input1){
+				$input2[$i] = $con->real_escape_string($input1);
+				$i++;
+			}
+			$sql1 = vsprintf($sql,$input2);
+		}else{
+			$sql1 = $sql;
+		}
+		if(!$r = $con->query($sql1)) die($con->error);
 		return $r;
 		$r->free();
 	}
