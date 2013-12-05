@@ -8,6 +8,10 @@ function loadblog(pg){
 			var menuindex = "content";
 			var add = {title:$("#title").val(),alias:$("#alias").val(),priority:$("#priority").val(),description:$("#description").val()};
 			break;
+                case "User":
+			var menuindex = "user";
+			var add = {username:$("#username").val(),password:$("#password").val()};
+			break;
 	}
 	var basic = {id:$("#id").val(),search:$("#search").val(),submit:$("#submit").text(),index:pg};
 	var json = mergejson(basic,add);
@@ -29,6 +33,9 @@ function loadform(){
 		case "Content":
 			var menuindex = "content";
 			break;
+                case "User":
+			var menuindex = "user";
+			break;
 	}
 	var formcontent = "form/"+menuindex+".php";
 	$.get(formcontent,function(data){
@@ -48,10 +55,12 @@ $(document).ready(function() {
 		loadblog('1');
 	});
 	$('#adminnav li a').click(function(e){
-		e.preventDefault();
+            if($(this).text()!=='Logout'){
+                e.preventDefault();
 		$('#menuindex').text($(this).text());
 		loadblog('1');
 		loadform();
+            }
 	});
 	$('#addnew').click(function(){
 		$("#submit").text("add");

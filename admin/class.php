@@ -68,20 +68,25 @@ class form{
 	}
 	function formtext($title,$id,$textarea=false){
 		if($textarea==true){
-			$input = '<textarea class="form-control" rows="5" id="'.$id.'"></textarea>';
+			$input = '<textarea class="form-control" rows="5" id="'.$id.'" name="'.$id.'"></textarea>';
 		}else{
-			$input = '<input type="text" class="form-control" id="'.$id.'" placeholder="'.$title.'">';
+			$input = '<input type="text" class="form-control" id="'.$id.'" placeholder="'.$title.'" name="'.$id.'">';
 		}
 		$out = $this->formbase($title,$input);
 		return $out;
 	}
 	function formtextsmall($title,$id){
-		$input = '<input type="text" class="form-control" id="'.$id.'" placeholder="'.$title.'" style="width:100px;">';
+		$input = '<input type="text" class="form-control" id="'.$id.'" placeholder="'.$title.'" style="width:100px;" name="'.$id.'">';
+		$out = $this->formbase($title,$input);
+		return $out;
+	}
+        function formpassword($title,$id){
+		$input = '<input type="password" class="form-control" id="'.$id.'" placeholder="'.$title.'" name="'.$id.'">';
 		$out = $this->formbase($title,$input);
 		return $out;
 	}
 	function formbutton($title,$id,$type='button'){
-		$input = '<button type="'.$type.'" class="btn btn-primary" id="'.$id.'">'.$title.'</button>';
+		$input = '<button type="'.$type.'" class="btn btn-primary" id="'.$id.'" name="'.$id.'">'.$title.'</button>';
 		$out = $this->formbase_nolabel($input);
 		return $out;
 	}
@@ -91,5 +96,53 @@ class form{
 		$out .= '<script>(function(){$(\'#upload\').ajaxForm({complete:function(xhr){$(\'#status\').html(xhr.responseText);}});})();</script>';
 		return $out;
 	}
+}
+class login{
+    function validation(){
+        $this->loginprocess();
+        $this->logoutprocess();
+        if(empty($_COOKIE['login'])){
+            return false;
+        }else{
+            $q = new database();
+            $con = $q->connect();
+            $rtotal = $q->query("SELECT id FROM login WHERE username='%s' AND ip='%s'",$con,array($_COOKIE['login'],$_SERVER['REMOTE_ADDR']));
+            if($rtotal->num_rows!=0){
+                $con->close();
+                return true;
+            }else{
+                setcookie('login','');
+                $con->close();
+                return false;
+            }
+        }
+    }
+    function loginprocess(){
+        if(!empty($_POST['username'])){
+            $q = new database();
+            $con = $q->connect();
+            $rtotal = $q->query("SELECT username FROM user WHERE username='%s' AND password=MD5('%s')",$con,array($_POST['username'],$_POST['password']));
+            if($rtotal->num_rows!=0){
+                $q->query("DELETE FROM login WHERE username='%s'",$con,array($_POST['username']));
+                $q->query("INSERT INTO login VALUES(null,'%s','%s',null)",$con,array($_POST['username'],$_SERVER['REMOTE_ADDR']));
+                setcookie('login',$_POST['username']);
+                $con->close();
+                header('location:index.php');
+            }else{
+                $con->close();
+                header('location:index.php');
+            }
+        }
+    }
+    function logoutprocess(){
+        if(!empty($_GET['logout'])){
+            $q = new database();
+            $con = $q->connect();
+            $q->query("DELETE FROM login WHERE username='%s'",$con,array($_COOKIE['login']));
+            setcookie('login','');
+            $con->close();
+            header('location:index.php');
+        }
+    }
 }
 ?>
