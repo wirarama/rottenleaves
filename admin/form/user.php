@@ -5,6 +5,5 @@
 	$f = new form();
 	echo $f->formtext('Username','username');
 	echo $f->formpassword('Password','password');
-        echo $f->formpassword('Password Confirm','password');
 	?>
 </form>

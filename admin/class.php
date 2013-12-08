@@ -41,7 +41,7 @@ class database{
 		$r->free();
 	}
 	function pagination($rtotal,$index){
-		echo '<ul class="pagination">';
+		echo '<div align="center"><ul class="pagination">';
 		$j=1;
 		for($i=1;$i<$rtotal;$i=$i+10){
 			if($j==$index){
@@ -51,7 +51,7 @@ class database{
 			}
 			$j++;
 		}
-		echo '</ul>';
+		echo '</ul></div>';
 	}
 }
 class form{
