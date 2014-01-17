@@ -24,7 +24,16 @@ $valid = $v->validation();
         ?>
         <div class="container-fluid">
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-                    <div class="navbar-brand" id="menuindex">Blog</div>
+            		<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					  <span class="sr-only">Toggle navigation</span>
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#" id="menuindex">Blog</a>
+				  </div>
+				  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <div class="navbar-left">
                             <ul class="nav navbar-nav">
                                     <li class="dropdown">
@@ -46,6 +55,7 @@ $valid = $v->validation();
                             <button type="button" class="btn btn-info" id="searchbtn"><span class="glyphicon glyphicon-search"></span>
 </button>
                     </form>
+                  </div>
             </nav>
             <!-- Button trigger modal -->
 
