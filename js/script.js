@@ -1,14 +1,8 @@
 $(document).ready(function() {
 	$(".content").css("display","none");
 	getblog("");
-	/*var p = getURLParameter("p");
-	if(p!=""){
-		$("#content #"+p).fadeIn();
-		$("#content ul li #"+p).addClass("navselected");
-	}else{*/
-		$("#content #home").fadeIn();
-		$("#content ul li #home").addClass("navselected");
-	//}
+        $("#content #home").fadeIn();
+        $("#content ul li #home").addClass("navselected");
 	$("#content nav ul li a").click(function(e){
 		e.preventDefault();
 		$('#content nav ul li a').removeClass("navselected");
@@ -31,9 +25,3 @@ function getblog(id){
 		$("#bloglist").html(data);
 	});
 }
-/*function getURLParameter(name) {
-    var url = window.location.href;
-    var out = url.split("/");
-    var last = out.length;
-    return out[last-1];
-}*/
