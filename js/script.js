@@ -9,9 +9,9 @@ $(document).ready(function() {
 		$("#content #home").fadeIn();
 		$("#content ul li #home").addClass("navselected");
 	//}
-	$("#content ul li a").click(function(e){
+	$("#content nav ul li a").click(function(e){
 		e.preventDefault();
-		$('#content ul li a').removeClass("navselected");
+		$('#content nav ul li a').removeClass("navselected");
 		$(this).addClass("navselected");
 		$(".content").css("display","none");
 		$("#content #"+$(this).text()).fadeIn();

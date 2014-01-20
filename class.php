@@ -5,13 +5,25 @@ class content{
 		$q = new database();
 		$con = $q->connect();
 		$r = $q->query("SELECT * FROM content ORDER BY priority",$con);
-		$nav = '<ul>';
+                $nav = '<nav class="navbar navbar-default" role="navigation">
+            		<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					  <span class="sr-only">Toggle navigation</span>
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					</button>
+				  </div>
+				  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="navbar-left">';
+		$nav .= '<ul class="nav navbar-nav">';
 		$body = '';
 		while($d = $r->fetch_assoc()){
 			$nav .= $this->formatnav($d['alias']);
 			$body .= $this->formatbody($d['alias'],$d['title'],$d['description']);
 		}
-		$nav .= '<div style="clear:left;"></div></ul>';
+                $nav .= '</ul></div>
+            </nav>';
 		$con->close();
 		$out = $nav.$body;
 		return $out;

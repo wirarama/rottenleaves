@@ -113,13 +113,17 @@ a:hover{
 	padding-bottom:20px;
 	margin:0px;
 }
+#content .navbar-default{
+        background:none;
+        border:0px none;
+}
 #content ul{
 	padding:0px 0px 40px 0px;
 	margin:0px;
 }
 #content ul li{
 	list-style:none;
-	float:left;
+	/*float:left;*/
 }
 #content ul li a:link,#content ul li a:active,#content ul li a:visited{
 	display:block;
