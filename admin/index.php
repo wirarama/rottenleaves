@@ -70,6 +70,7 @@ $valid = $v->validation();
                     <div class="modal-body">
                             <div id="formcontainer">
                             </div>
+                            <div id="formdelete">Are you sure to delete this data?</div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-primary" id="submit" data-dismiss="modal" aria-hidden="true">add</button>
