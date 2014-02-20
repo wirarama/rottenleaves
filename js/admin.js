@@ -2,7 +2,7 @@ function loadblog(pg){
 	switch($('#menuindex').text()){
 		case "Blog":
 			var menuindex = "blog";
-			var add = {title:$("#title").val(),description:$("#description").val(),detail:$("#detail").val()};
+			var add = {title:$("#title").val(),description:$("#description").val(),detail:$("#detail").val(),session:$("#session").val()};
 			break;
 		case "Content":
 			var menuindex = "content";
@@ -62,10 +62,14 @@ $(document).ready(function() {
             }
             loadform();
 	});
-	$('#addnew').click(function(){
+        $(document).on("click","#addnew",function(){
                 $("#formcontainer").css("display","block");
                 $("#formdelete").css("display","none");
 		$("#submit").text("add");
+                $.get("session.php",function(data){
+                    $("#session").val(data);
+                    $("#sessionpic").val(data);
+                });
 	});
 	$(document).on("click",".pagination li",function(){
 		loadblog($(this).text());
@@ -87,6 +91,7 @@ $(document).ready(function() {
                         var id = form[i].getAttribute("id");
                         $("#"+id).val($(this).parent().children('.attr'+id).html());
                 }
+                $("#sessionpic").val($(this).parent().children('.attrsession').html());
                 if($(this).text()!=='del'){
                     $("#formcontainer").css("display","block");
                     $("#formdelete").css("display","none");

@@ -90,8 +90,8 @@ class form{
 		$out = $this->formbase_nolabel($input);
 		return $out;
 	}
-	function formfile($title,$id){
-		$input = '<div style="float:left;"><input type="file" name="'.$id.'[]" multiple></div><div style="float:left;"><input type="submit" value="Upload" id="uploadpic" class="btn btn-primary"></div><div style="clear:both;"></div><div id="status"></div>';
+	function formfile($title,$id,$type='blog'){
+		$input = '<div style="float:left;"><input type="hidden" name="type" value="'.$type.'"><input type="file" name="'.$id.'[]" multiple></div><div style="float:left;"><input type="submit" value="Upload" id="uploadpic" class="btn btn-primary"></div><div style="clear:both;"></div><div id="status"></div>';
 		$out = $this->formbase($title,$input);
 		$out .= '<script>(function(){$(\'#upload\').ajaxForm({complete:function(xhr){$(\'#status\').html(xhr.responseText);}});})();</script>';
 		return $out;
