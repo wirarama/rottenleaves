@@ -1,4 +1,6 @@
 <?php
+$host = 'http://localhost/rottenleaves';
+$path = '/opt/lampp/htdocs/rottenleaves';
 class database{
 	function connect(){
 		$con = new mysqli('localhost','admin','dallas99','blog');

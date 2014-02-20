@@ -2,7 +2,7 @@
 include('class.php');
 $q = new database();
 $con = $q->connect();
-$output_dir = "../uploads/";
+$output_dir = $path."/uploads/";
 $files = array();
 $fdata = $_FILES['picture'];
 if (is_array($fdata['name'])) {
@@ -24,6 +24,7 @@ foreach($files as $file){
         $query = $q->query("INSERT INTO pictures VALUES(null,'%s','%d')",$con,array($file["name"],$_POST['sessionpic']));
         echo '<div><img src="'.$output_dir.$file['name'].'"></div>';
 }
+$con->close();
 function resizejpg($input,$output,$newwidth,$newheight=NULL){
     list($width, $height) = getimagesize($input);
     if ($newheight === \NULL) {
